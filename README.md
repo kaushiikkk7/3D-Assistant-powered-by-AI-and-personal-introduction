@@ -1,10 +1,18 @@
-# 3D-Assistant-powered-by-AI-and-personal-introduction
-A boilerplate to build R3F projects
+# 3D Assistant Powered by AI and Personal Introduction
 
-```
-yarn
-yarn dev
-```
+This is a 3D-powered AI voice assistant project with multilingual support (English & Hindi), featuring:
+- 3D avatar with lip sync and facial animations
+- Voice input (speech recognition)
+- Responses via ElevenLabs (with visemes)
+- Personal & college introduction integration
 
+## Tech Stack
+- React + Vite
+- React Three Fiber
+- GLSL shaders
+- ChatGPT / Gemini
+- ElevenLabs API
+- Web Speech API
 
-![image](https://user-images.githubusercontent.com/6551176/221732091-23ee52cb-4150-42fa-b998-43628d7a6b0d.png)
+## Author
+👤 Kaushik Mondal

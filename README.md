@@ -1,4 +1,4 @@
-# r3f-vite-starter
+# 3D-Assistant-powered-by-AI-and-personal-introduction
 A boilerplate to build R3F projects
 
 ```

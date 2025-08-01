@@ -1,0 +1,560 @@
+/* Siri Listening Effect */
+.siri-orb-container {
+  position: fixed;
+  top: 16%;
+  left: 53%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.siri-orb {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: siriFloat 4s ease-in-out infinite;
+}
+
+.siri-sphere {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: 
+    radial-gradient(circle at 50% 50%, 
+      rgba(0, 0, 0, 0.1) 0%,
+      rgba(30, 20, 80, 0.3) 40%,
+      rgba(60, 40, 120, 0.2) 100%);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(150, 100, 255, 0.3);
+  box-shadow: 
+    0 0 30px rgba(150, 100, 255, 0.4),
+    0 0 60px rgba(100, 200, 255, 0.2),
+    inset 0 0 30px rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+
+.siri-flow {
+  position: absolute;
+  border-radius: 50% 30% 60% 40%;
+  animation: siriMorph 6s ease-in-out infinite;
+}
+
+.siri-flow-1 {
+  width: 60px;
+  height: 80px;
+  background: linear-gradient(135deg, 
+    rgba(255, 100, 200, 0.8) 0%,
+    rgba(150, 50, 255, 0.6) 50%,
+    rgba(100, 150, 255, 0.4) 100%);
+  top: 20%;
+  left: 25%;
+  animation-delay: 0s;
+  transform-origin: center;
+}
+
+.siri-flow-2 {
+  width: 45px;
+  height: 60px;
+  background: linear-gradient(45deg, 
+    rgba(0, 255, 255, 0.7) 0%,
+    rgba(100, 200, 255, 0.5) 50%,
+    rgba(200, 100, 255, 0.3) 100%);
+  top: 40%;
+  right: 20%;
+  animation-delay: 1s;
+  transform-origin: center;
+}
+
+.siri-flow-3 {
+  width: 70px;
+  height: 50px;
+  background: linear-gradient(225deg, 
+    rgba(255, 200, 100, 0.6) 0%,
+    rgba(255, 100, 150, 0.4) 60%,
+    rgba(150, 200, 255, 0.2) 100%);
+  bottom: 25%;
+  left: 20%;
+  animation-delay: 2s;
+  transform-origin: center;
+}
+
+.siri-flow-4 {
+  width: 55px;
+  height: 70px;
+  background: linear-gradient(315deg, 
+    rgba(200, 255, 200, 0.5) 0%,
+    rgba(100, 255, 255, 0.4) 40%,
+    rgba(200, 100, 255, 0.3) 100%);
+  top: 15%;
+  right: 25%;
+  animation-delay: 3s;
+  transform-origin: center;
+}
+
+.siri-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, 
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(200, 255, 255, 0.6) 30%,
+    rgba(255, 200, 255, 0.3) 60%,
+    transparent 100%);
+  border-radius: 50%;
+  animation: siriGlow 3s ease-in-out infinite;
+}
+
+@keyframes siriFloat {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.02);
+  }
+}
+
+@keyframes siriMorph {
+  0%, 100% {
+    transform: rotate(0deg) scale(1) skew(0deg);
+    border-radius: 50% 30% 60% 40%;
+  }
+  25% {
+    transform: rotate(90deg) scale(1.1) skew(5deg);
+    border-radius: 30% 60% 40% 50%;
+  }
+  50% {
+    transform: rotate(180deg) scale(0.9) skew(-5deg);
+    border-radius: 60% 40% 50% 30%;
+  }
+  75% {
+    transform: rotate(270deg) scale(1.05) skew(3deg);
+    border-radius: 40% 50% 30% 60%;
+  }
+}
+
+@keyframes siriGlow {
+  0%, 100% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+
+.glass-container {
+  position: absolute;
+  bottom: 5%;
+  left: 55%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  
+  padding: 1rem 1.4rem;
+  background: rgba(249, 242, 242, 0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  width: 90%;
+  max-width: 430px;
+  z-index: 999;
+}
+
+.glass-input {
+  width: 100%;
+  resize: none;
+  overflow: hidden;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border: none;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.0);
+  color: rgb(255, 255, 255);
+  outline: none;
+  transition: all 0.3s ease;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  min-height: 1.5rem;
+  max-height: 200px;
+  box-sizing: border-box;
+}
+
+.glass-input:focus {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+.glass-container input::placeholder,
+.glass-input::placeholder {
+  color: #f6f6f6;
+  opacity: 0.8;
+}
+
+/* 🔻 Hide input when listening */
+.input-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.95);
+}
+
+/* 🟣 Live speech transcript */
+.live-transcript {
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  position: absolute;
+  right: 1.4rem;
+  bottom: 1.5rem;
+  left :1rem;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 10px;
+  text-align: center;
+  width: 50%;
+  animation: fadeIn 0.2s ease-in-out;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Flag styles */
+.flag {
+  width: 20px;
+  height: 16px;
+  background-size: cover;
+  border-radius: 8px;
+}
+
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 0.2rem 0.4rem;
+  border-radius: 20px;
+  position: relative;
+}
+
+.switch {
+  width: 28px;
+  height: 16px;
+  background: #444;
+  border-radius: 999px;
+  margin-left: 2px;
+  position: relative;
+  transition: background 0.3s;
+}
+
+.switch::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  transition: transform 0.3s;
+}
+
+.switch.on::before {
+  transform: translateX(12px);
+}
+
+/* Controls section */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  position: absolute;
+  right: 1.4rem;
+  bottom: 1rem;
+}
+
+/* Buttons */
+.mic,
+.ask-btn {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 🔧 Ask button fade-out class while Siri is listening */
+.ask-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.95);
+}
+
+/* Hover and active styles */
+.mic:hover,
+.ask-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.ask-btn:active {
+  transform: scale(0.95) translateY(0);
+}
+
+/* Recording animation for mic */
+.mic.recording {
+  background-color: #ff4d4d;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 77, 77, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 77, 77, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 77, 77, 0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Flags */
+.flag-en {
+  background-image: url('https://flagcdn.com/us.svg');
+}
+
+.flag-hi {
+  background-image: url('https://flagcdn.com/in.svg');
+}
+
+/* EMAIL POPUP STYLES */
+.email-popup {
+  position: absolute !important;
+  bottom: 20% !important;
+  left: 5% !important;
+  transform: none !important;
+  width: 300px !important;
+  min-width: auto !important;
+  max-width: none !important;
+  z-index: 10000 !important;
+  padding: 1rem 1.4rem !important;
+  background: rgba(249, 242, 242, 0.08) !important;
+  backdrop-filter: blur(10px) !important;
+  border-radius: 16px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+  animation: none !important;
+}
+
+/* Remove overlay for email popup */
+.email-popup::before {
+  display: none;
+}
+
+/* Enhanced glass input for email popup */
+.email-popup .glass-input {
+  background: rgba(0, 0, 0, 0.0) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 8px !important;
+  padding: 0.75rem 1rem !important;
+  color: white !important;
+  font-size: 1rem !important;
+  transition: all 0.3s ease !important;
+  box-sizing: border-box !important;
+  outline: none !important;
+}
+
+.email-popup .glass-input:focus {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1) !important;
+}
+
+.email-popup .glass-input::placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Enhanced buttons for email popup */
+.email-popup .ask-btn {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 0.4rem 0.8rem !important;
+  color: white !important;
+  font-weight: 500 !important;
+  font-size: 0.9rem !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+}
+
+.email-popup .ask-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.25) !important;
+  transform: translateY(-1px) !important;
+}
+
+.email-popup .ask-btn:disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+/* Cancel button specific styles */
+.email-popup .ask-btn[style*="rgba(239, 68, 68"] {
+  background: linear-gradient(135deg, 
+    rgba(239, 68, 68, 0.8) 0%,
+    rgba(220, 38, 38, 0.8) 100%) !important;
+  border: 1px solid rgba(239, 68, 68, 0.3) !important;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2) !important;
+}
+
+.email-popup .ask-btn[style*="rgba(239, 68, 68"]:hover {
+  background: linear-gradient(135deg, 
+    rgba(239, 68, 68, 0.9) 0%,
+    rgba(220, 38, 38, 0.9) 100%) !important;
+  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.3) !important;
+}
+
+/* File input styling */
+.email-popup input[type="file"] {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 2px dashed rgba(255, 255, 255, 0.2) !important;
+  border-radius: 12px !important;
+  padding: 16px !important;
+  color: white !important;
+  font-size: 14px !important;
+  transition: all 0.3s ease !important;
+  cursor: pointer !important;
+}
+
+.email-popup input[type="file"]:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(59, 130, 246, 0.4) !important;
+}
+
+/* Labels styling */
+.email-popup label {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  margin-bottom: 8px !important;
+  display: block !important;
+}
+
+/* Info box styling */
+.email-popup [style*="rgba(59, 130, 246, 0.1)"] {
+  background: linear-gradient(135deg, 
+    rgba(59, 130, 246, 0.1) 0%,
+    rgba(99, 102, 241, 0.05) 100%) !important;
+  border: 1px solid rgba(59, 130, 246, 0.2) !important;
+  border-radius: 12px !important;
+  padding: 16px !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+/* Success message for file selection */
+.email-popup p[style*="color: #4ade80"] {
+  color: #10b981 !important;
+  background: rgba(16, 185, 129, 0.1) !important;
+  border: 1px solid rgba(16, 185, 129, 0.2) !important;
+  border-radius: 8px !important;
+  padding: 8px 12px !important;
+  font-size: 13px !important;
+}
+
+/* Email popup animation */
+@keyframes emailPopupFadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Responsive design for email popup */
+@media (max-width: 600px) {
+  .email-popup {
+    left: 2% !important;
+    width: 280px !important;
+    bottom: 15% !important;
+  }
+  
+  .controls {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ask-btn {
+    padding: 8px 14px;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .glass-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+  }
+
+  .controls {
+    justify-content: space-between;
+  }
+  
+  .siri-orb-container {
+    top: 10%;
+  }
+  
+  .siri-orb {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .siri-sphere {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .siri-glow {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .email-popup {
+    left: 2% !important;
+    width: 250px !important;
+    bottom: 10% !important;
+  }
+}

@@ -1,0 +1,15 @@
+
+
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
+body {
+  margin: 0;
+}
+
+
+:root {
+  --leva-sizes-rootWidth: 340px;
+}

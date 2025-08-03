@@ -2,6 +2,7 @@
 import { useState, useRef } from "react";
 import GlassInput from "./components/GlassInput";
 import { Experience } from "./components/Experience";
+import ChatHistoryPopup from "./components/ChatHistoryPopup";
 import { getGeminiAnswer } from "./utils/geminiAPI";
 import { getElevenLabsAudio } from "./utils/elevenLabsAPI";
 import {
@@ -9,8 +10,6 @@ import {
   playTextBasedLipSync,
 } from "./components/VisemePlayer";
 import { Leva } from "leva";
-
-
 
 function App() {
   const [isListening, setIsListening] = useState(false);
@@ -20,11 +19,20 @@ function App() {
   const [currentViseme, setCurrentViseme] = useState(null);
   const [isAvatarSpeaking, setIsAvatarSpeaking] = useState(false);
   const [currentLanguage, setCurrentLanguage] = useState("en");
- const [showEmail, setShowEmail] = useState(false);
+  const [showEmail, setShowEmail] = useState(false);
+  
+  // Chat History States
+  const [showChatHistory, setShowChatHistory] = useState(false);
+  const [chatHistory, setChatHistory] = useState([]);
 
   const currentAudioRef = useRef(null);
   const cleanupVisemeRef = useRef(null);
   const animationStartedRef = useRef(false);
+
+  // Add message to chat history
+  const addToHistory = (text, type, timestamp = Date.now()) => {
+    setChatHistory(prev => [...prev, { text, type, timestamp }]);
+  };
 
   const speak = async (text, language = "en") => {
     try {
@@ -37,6 +45,9 @@ function App() {
       setAnimation("talking");
       setIsAvatarSpeaking(true);
       setCurrentViseme(null);
+
+      // Add assistant message to history
+      addToHistory(text, 'assistant');
 
       const { audioUrl, visemes, audio } = await getElevenLabsAudio(text, language);
 
@@ -125,6 +136,9 @@ function App() {
 
   const handleSendMessage = async (inputText, language = currentLanguage) => {
     try {
+      // Add user message to history
+      addToHistory(inputText, 'user');
+
       if (currentAudioRef.current) {
         if (currentAudioRef.current.pause) {
           currentAudioRef.current.pause();
@@ -164,7 +178,6 @@ function App() {
 
   return (
     <>
-    
       <Experience
         isListening={isListening}
         transcript={transcript}
@@ -172,6 +185,7 @@ function App() {
         visemeWeights={currentViseme}
         isAvatarSpeaking={isAvatarSpeaking}
       />
+      
       <GlassInput
         setIsListening={setIsListening}
         setTranscript={setTranscript}
@@ -181,7 +195,39 @@ function App() {
         isAvatarSpeaking={isAvatarSpeaking}
         currentLanguage={currentLanguage}
       />
-     
+
+      {/* Chat History Toggle Button */}
+      <button
+        onClick={() => setShowChatHistory(!showChatHistory)}
+        className="chat-history-toggle"
+        title={currentLanguage === "hi" ? "चैट इतिहास देखें" : "View Chat History"}
+      >
+        <svg 
+          className="w-5 h-5" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+        >
+          <path 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            strokeWidth={2} 
+            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" 
+          />
+        </svg>
+        {chatHistory.length > 0 && (
+          <span className="chat-count">{chatHistory.length}</span>
+        )}
+      </button>
+
+      {/* Chat History Popup */}
+      <ChatHistoryPopup
+        isOpen={showChatHistory}
+        onClose={() => setShowChatHistory(false)}
+        chatHistory={chatHistory}
+        currentLanguage={currentLanguage}
+      />
+      
       <Leva hidden />
     </>
   );
